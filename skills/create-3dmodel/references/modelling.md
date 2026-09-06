@@ -1,20 +1,85 @@
 # Standalone prop construction
 
-Derived from the successful create-assets modelling workflow, without its skin assembly steps.
+Use the approved shapes and finish as a starting point, then let the current reference determine the object's construction. Broad facets, smooth curves and textured foliage can coexist in the same pack. Skin layouts and raster icon recipes are separate workflows.
 
-## Shape and finish
+## Read the reference before building
 
-- Chunky, low-poly geometry with moulded, softened edges and readable proportions. Use a small material palette, broad faces, and real bevel highlights. No thick black icon outlines on 3D models.
-- Model the object's actual silhouette. A barrel needs tapered ends, a bulging middle, and hoops following that changing radius. A plain cylinder with floating rings loses those cues.
-- Use geometry for seams and raised details that must hold up from multiple angles. Keep small features thick enough to read at game distance. Avoid dense realism or decorative detail unless requested.
-- Scale bevel width to the object and keep it below seam spacing. On a roughly 3-stud prop, widths around 0.02-0.03 units with 2 segments are a useful starting point. Preserve deliberate hard edges when smoothing normals; do not confuse normal smoothing with smoothing the geometry.
-- Apply transforms before bevels. With `primitive_cube_add(size=1)`, object scale corresponds to the desired full dimensions, not half dimensions.
-- For untextured props, keep colors separate by material/object for the established Roblox upload pipeline, where vertex-color-only materials did not survive. Use UV-mapped image materials when the reference needs painted surface detail; a single textured material can contain multiple colors. Preserve functional separation as well: same color is not a reason to fuse a lid with a handle.
-- Measure a prop against the world, not a contact sheet that resizes everything to fill its own tile. Treat one Blender unit as one intended Roblox stud in this workflow.
+Identify the subtype, silhouette, cross-section, openings, proportions and colour regions. Compare the ratio of solid material to empty space, the thickness of framing, the height of lids, and how attachments meet their supports. A recognizable outline is only the start.
 
-## Materials and renders
+An open rail barricade is not a thick panel with rounded holes. A lantern with a pitched roof is not a globe lamp. A low stepped chest with chunky blue framing is not a tall domed chest with thin bands. Do not add details such as reflectors or a gold latch when they materially change the supplied design.
 
-The working local baseline is Blender 5.1.2, EEVEE, Standard color management, transparent film, and PNG RGBA. Inspect the installed Blender API when another version is present.
+Read colour blocks as part of the construction. A red hydrant still needs deliberate differences between its body, bands, flanges and caps. Do not assign nearly identical colours and expect smooth shading to provide the missing separation. Judge scale in the game world: contact-sheet tiles often resize different objects to the same apparent height.
+
+## Spend geometry on the form
+
+Start with sparse cross-sections, shaped profiles, extrusions and sweeps. Add loops where taper, flare, curvature or a joint requires them. Avoid voxel remeshing as the default for simple stylised shapes. Measure evaluated triangles per component after modifiers; a few thousand is not a target or a claimed Roblox platform limit.
+
+Use the representation the form requires:
+
+- A barrel needs bulging staves and hoops fitted to their changing radius.
+- A shovel blade needs a concave scoop with thickness and a rounded outline. A narrow wedge or flat plate cannot express the same form.
+- A D-grip needs a coherent fork/socket and real opening. Two diagonal bars meeting a shaft are insufficient.
+- A pick head needs a changing section; taper its tips in width and thickness.
+- A trophy needs an open bowl, shaped stem and fitted handles.
+- An inflatable animal needs a dimensional muzzle and neck. Increasing the thickness of a flat silhouette does not supply anatomy.
+
+Keep functional pieces independently editable: barrel hoops, chest lid, wheels, handles, foliage and hardware. Within a continuous manufactured or inflated component, use connected topology or verified unions when overlapping pieces would create visible seams. Joining objects in a list does not connect their geometry. Do not merge everything merely because it shares a colour.
+
+Apply transforms before bevels. With `primitive_cube_add(size=1)`, object scale is the full intended dimension, not half of it. Scale bevel width to the prop and keep it below seam spacing; around 0.02–0.03 units on a roughly 3-stud prop is a useful starting point. One or two segments often suffice. Preserve broad planar faces and avoid tiny bevels becoming the main source of polygon count.
+
+## Fit joints and prevent flicker
+
+Check the full attachment section against the actual receiving surface, including taper, bevels and endpoint direction. A centreline touching a surface is not a fitted joint.
+
+- Seat shafts within sockets and cap them cleanly. Keep a crate brace against its plank face and inside the frame's depth.
+- Compute the trophy wall radius at each handle's attachment height. Bury both lower handle ends within that wall without exposing them inside the bowl.
+- Put a cable's complete end section inside its insulator. A centreline near the block's upper face leaves the cable perched on top. Check its radius and entry angle from above and the side.
+- Make castle crowns thick enough for short, broad battlements. Cutting notches into an integral crown preserves the tower contour and avoids thin tabs, perched blocks and overhangs.
+- Give adjacent coloured strips real thickness and separate them where appropriate. Side-by-side mane and tail strips avoid the z-fighting caused by stacked coplanar sheets. Check both sides and the rear, including every bend.
+
+For closed tubes, use a continuous radial/vertical frame or a verified transported frame. Switching a sweep's reference axis near tangent alignment can twist the cross-section even when manifold and volume checks pass. Inspect the whole inflatable ring and the whole curved tail; checking only their endpoints misses this failure.
+
+## Choose shading deliberately
+
+Use smooth normals for continuous rounded surfaces such as trophy bowls and inflated bodies. Keep deliberate hard edges at rims, creases, cut faces and planar bases. When the reference calls for broad visible facets, retain those faces and their flat shading. Neither smoothing everything nor leaving everything flat reproduces the approved style.
+
+Normal smoothing changes lighting interpolation, not silhouette or topology. It cannot repair a jagged outline, dense rough remesh, unsupported attachment or disconnected branch. Check that intended normals survive the exported Studio mesh, not just the Blender viewport.
+
+## Trees, foliage and logs
+
+Use a few broad radial faces, sparse taper/flare rings, a widened foot and angular connected branches for the approved faceted trunk direction. Carry supporting branches into the canopy instead of ending them visibly underneath it.
+
+Choose foliage geometry from the reference:
+
+- Recognizable textured oak leaves need original UV-mapped leaf clusters/cards or shaped leaves, not solid green spheres. Preserve canopy shape, leaf scale and density. Check the back and underside. Alpha-cutout cards are intentional open surfaces; validate UVs, normals, alpha and two-sided rendering rather than requiring sealed volume.
+- Solid beach palms use broad folded blades with thickness, a raised centre ridge, taper and drooping tips. Keep their fronds long and narrow enough to read as a palm; the oak's textured-card treatment is not a default for every tree. Segmented angular trunks and coconut clusters follow the beach reference.
+- The approved loose logs use orange/coral bark, broad longitudinal facets, pale polygonal cuts, a narrow bark lip and a few fitted branch stubs. Keep cuts nearly flush. Dense tubular growth rings and realistic dark bark were inappropriate for this reference.
+
+## Upgrade design
+
+Rare or celestial tools need a distinctive silhouette, proportions and thematic features. Recolouring a basic tool and attaching a badge is not enough. The celestial axe direction used twin crescents, dimensional feather/crystal forms and a shaped haft. Treat those as evidence of a meaningful upgrade, not required decorations for every special tool.
+
+## Approved examples and their transferable lessons
+
+These are user-reviewed examples, not fixed recipes for every new subject. The generated models remain in the consuming project; this skill does not require or redistribute them.
+
+| Example | What worked |
+| --- | --- |
+| OakTree_03 | Six broad trunk faces, sparse taper/flare rings and connected branches; approved textured foliage preserved. Trunk: 109 vertices / 214 triangles, reduced from 3,202 triangles. Whole tree: 998 triangles. |
+| Revised shovel, pickaxe and crate | Coherent grip, actual rounded scoop, tapered pick tips, and a brace fitted within the crate frame. |
+| HandSaw_01 and Wrench_01 | Accepted tool silhouettes and construction; preserve them when revising other tools. |
+| Trophy_02 | Smooth bowl/stem normals with handles seated into the actual tapered wall. |
+| FireHydrant_02 and RoadBarricade_02 | Broad facets and purposeful red tonal regions; narrow open rails, rectangular gaps and matching yellow supports. |
+| Streetlamp_04 | Straight tapered lantern sides, corner framing and pitched roof around a separate small Neon bulb; enclosing housing stays non-Neon. |
+| UtilitySpan_02 and LogPile_02 | Cable sections seated in insulator blocks; simple loose logs with pale cuts. The three-log model uses 504 triangles versus 5,396 in the first attempt. |
+| UnicornFloatie_02 | Rounded fused ring/neck/muzzle, pointed ears and forehead horn; separate coloured mane and tail strips with continuous sweep frames. |
+| Sandcastle_02 and BeachChest_02 | Integral thick crowns with short notches; low stepped chest lid, chunky blue framing, broad corner feet and no invented gold latch. |
+
+Approval of these replacements does not approve every other item in their packs. Preserve accepted components and apply new user feedback to the specific subject it concerns.
+
+## Materials and preview setup
+
+The tested local baseline is Blender 5.1.2 with EEVEE, Standard colour management, transparent film and PNG RGBA. Inspect the installed version rather than replacing it to match this example. Relevant baseline settings:
 
 ```python
 scene.render.engine = "BLENDER_EEVEE"
@@ -27,64 +92,14 @@ scene.render.image_settings.file_format = "PNG"
 scene.render.image_settings.color_mode = "RGBA"
 ```
 
-AgX changes the saturation and brightness of this style. Set the intended view transform before tuning the palette. EEVEE property names change between Blender versions; do not blindly set old `use_gtao` properties.
+AgX changes this palette's saturation and brightness; set the view transform before tuning colours. EEVEE properties vary by version, so do not blindly reuse removed options. Light with a broad area key above/to one side, a weaker opposing fill and moderate world illumination. Scale light energy to the object. Roughness around 0.4–0.5 is a starting point; reserve metallic response for components that need it.
 
-Use a broad area key above and to one side, a weaker fill opposite it, and moderate world illumination. Aim the lights at the object. Adjust energy to the model's actual scale and distance; no single wattage fits every model. Plastic-like roughness around 0.4-0.5 is a starting point. Reserve metallic material response for metal components.
+Convert display hex/sRGB colours to linear values for Blender's Principled BSDF. Preserve the original display colours separately for Roblox Color3 assignment. In the established uploader route, vertex-colour-only materials did not survive reliably: use explicit part colours for untextured pieces, or UV textures when painted detail is required.
 
-When a palette is written as display hex/sRGB colors, convert to linear RGB before assigning Principled BSDF base colors. Store the original display colors separately for Roblox Color3 assignment.
+For lamps, keep the shell/frame, socket and small light source separate. Tune housing transparency and the bulb's Neon colour in Studio without changing global scene lighting. Record these property overrides; an FBX material alone does not reproduce the Studio setup.
 
-Frame an angled view to show depth and an alternate view that can reveal what the first conceals. Use front views for silhouettes and faces, top views for flat props, and back views for objects visible from all sides. Keep lighting and cameras out of mesh exports.
+## Review the vulnerable views
 
-## Geometry checks
+Use actual Blender renders and actual Studio captures. Inspect a gameplay view plus views that expose the likely failure: crate side, shovel profile, bowl interior, both handle joints, cable entry, crown top, foliage underside, or floatie rear. A distant overview and a successful asset ID do not validate those details.
 
-Evaluate meshes after modifiers for triangle counts. Check boundary/non-manifold edges and normals for pieces intended to be solid. Intentional openings in a hollow object still require wall thickness and properly connected rim geometry. Validate the intended design, not a universal requirement that all models be sealed solids.
-
-Watch for z-fighting, buried raised details, excessive seam gaps, detached attachments, and bevel self-intersections. Rendered inspection is required alongside numerical checks.
-
-The first barrel example uses 12 shaped staves, two fitted hoops, six inset lid planks, and a base. These are subject-specific choices, not a template for every prop.
-
-
-## Lessons from reviewed model revisions
-
-- **Choose the correct representation.** Flat extrusions suit genuinely plate-like pieces. A curved tool head needs a swept, changing cross-section; a scoop needs an actual concave surface and thickness. Model curvature across depth as well as in the outline. Taper sharp ends in both dimensions so they do not become broad chisel tips unintentionally.
-- **Construct continuous components.** A D-grip is a coherent fork/socket with a real opening, not two diagonal bars touching a shaft. Use connected topology or a verified union where the manufactured part should be continuous. Keep separate parts where the real design has a joint or material boundary. Joining objects in a list does not make their geometry continuous.
-- **Fit the junctions.** Insert a shaft into a fitted socket, blend necks into the supported form, and terminate caps cleanly. Avoid exposed pegs, collars cutting through heads, or decorative pieces visibly stuck on without a seat. Watch coplanar surfaces after booleans and bevels. On the revised shovel, unioning clean base meshes before bevels avoided fragmented junctions.
-- **Measure protrusion relative to neighbours.** The crate brace belongs against the plank face and within the outer frame's depth. A nonzero gap is not evidence of a proper fit. Check front, side and oblique views and compare the actual face planes before export.
-- **Preserve deliberate roundness.** Low-poly describes the economy of geometry, not a requirement to make every surface flat. Use enough outline segments for a rounded blade and smooth shading where continuous bowl curvature should read clearly. Keep bevels and intentionally planar surfaces crisp.
-- **Special tiers need shape design.** When a user asks for a rare, upgraded, celestial or similarly special item, develop a stronger silhouette, proportions, material treatment and one or two thematic features. Recoloring a basic shape and attaching a badge is insufficient. The accepted direction for the celestial axe added twin crescents, dimensional feathers/crystals and a shaped haft. Treat those as an example of meaningful upgrade design, not details to copy onto every special item.
-- **Review the vulnerable view.** Front views can conceal a protruding brace or a paper-thin head. Add side/oblique inspection for attachments and section changes; look into bowls and handle openings. Fix the geometry demonstrated to be wrong instead of hiding it with camera angle or shading.
-
-For new subjects, apply the same reasoning: a saw needs a coherent pierced grip and teeth integrated into its cutting edge; a trophy needs an open cup with connected handles; logs need end faces that fit the bark; a tree needs convincing trunk/branch transitions. Avoid accumulating extra surface decoration as a substitute for those forms.
-
-## Shading, foliage, and attachment review
-
-When references call for broad visible facets, model those faces deliberately and retain their shading; this overrides the general smooth-surface default. Otherwise default to smooth shading on continuous curved surfaces: bowls, stems, organic trunks, rounded handles, and moulded forms. Preserve sharp normals at deliberate creases, rims, planar bases and cutting edges. Flat shading is an intentional visual choice, not the default consequence of low polygon count. Set smooth face shading and intentional sharp edges in the source, and verify that their normals survive export. Smooth shading changes the lighting interpolation, not the silhouette or topology. Use geometry smoothing only when the form itself needs correction, such as rough remeshed branch junctions; recheck their thickness afterward. Judge normals in the exported Studio mesh as well as Blender; smooth shading cannot repair a jagged silhouette or a poorly joined branch.
-
-Inspect each attachment endpoint at close range after bevels. Compute the supporting surface at the actual endpoint height: a tapered cup has a different radius at its lower handle joint than at the rim. Check the full handle cross-section against the wall, not just its center point. Seat handle ends within the wall without exposing their ends inside the bowl. Inspect both lower joints from a low oblique view and the bowl interior from above. A wide overview does not validate these junctions.
-
-When tree references show recognizable leaves, use original leaf textures with UV-mapped clusters/cards or shaped leaves, rather than substituting solid green spheres. Choose the foliage treatment from the reference: painted clumps, layered leaf cards, or shaped fronds need different geometry. Preserve the requested canopy silhouette and use smooth trunk/branch shading. Carry supporting branches into the foliage so their cut or pointed ends do not stop visibly below it. Inspect the rear and underside as well as the front; keep leaf scale and density readable at gameplay distance. Alpha-cutout foliage cards are intentional open surfaces: validate their UVs, normals and two-sided rendering instead of requiring sealed volume. Export and verify the actual texture in Studio; a local Blender material alone is not a delivered textured model.
-
-## Approved example: broad faceted tree trunk
-
-The user explicitly preferred OakTree_03's simple trunk over both the dense remeshed original and the smooth-shaded revision. The successful form used six broad radial faces, a few taper/flare rings, a widened foot, and angular connected branches. Its visible roundness came from an intentionally shaped cross-section. Broad flat shading was part of the requested design; neither adding vertices nor applying smooth shading alone solved the problem.
-
-The trunk used 109 vertices and 214 evaluated triangles, down from 3,202 triangles in the preceding revision. The whole tree used 998 triangles. The previously approved textured foliage was preserved. These measurements are evidence of an effective simplification, not fixed limits for other trees.
-
-For comparable simple stylised forms, build the main silhouette from sparse rings or controlled profiles first. Avoid voxel remeshing as the default. Spend geometry on silhouette changes and fitted junctions, then measure each component after modifiers. Preserve intentional facets when the reference shows them; keep smooth shading for genuinely continuous surfaces such as the approved trophy bowl.
-
-The measured example is named OakTree_03 in the originating project. Generated models are not included in this skill checkpoint; the construction guidance and measurements above are self-contained.
-
-
-## Match the reference's construction and colour structure
-
-Identify the object's subtype and its solid-to-empty balance before building it. In the street set, a slim open rail barricade was incorrectly replaced by a thick panel with capsule holes, dark feet and added reflector strips. Match rail/post thickness, opening proportions and support shape; omit details absent from the chosen reference when they materially change the design. Likewise, a compact faceted globe lamp is a different design from a square lantern with a pitched roof.
-
-Read colour regions as part of the design. A predominantly red hydrant can still require contrasting body, flanges, recessed bands and caps. Preserve those purposeful tonal differences instead of assigning almost identical reds and relying on smooth shading. Compare head/body proportions, outlet length and game-world scale alongside the silhouette. Use broad flat facets where the reference calls for them; the accepted smooth trophy does not imply every manufactured prop should be smooth.
-
-## Approved street-set direction
-
-The user approved FireHydrant_02 and RoadBarricade_02. The hydrant uses broad facets, purposeful red tonal regions, stepped flanges, shorter outlets and a larger overall scale. The barricade uses narrow rails and uprights, large rectangular openings and matching yellow supports. Carry forward their simplified proportions, economical topology and colour separation when developing comparable street props. These approvals do not extend to every item in the set.
-
-For a lamp, model its outer housing and internal light source separately. Keep the cap, socket and enclosing frame or glass readable around a smaller Neon bulb. Do not make the entire outer globe Neon: the resulting glare erases the housing and changes the silhouette. Check both the bulb's visibility and the surrounding structure in the actual Studio view; tune transparency and emission without changing global scene lighting.
-
-When defining a new asset family, use the requested small review set to establish the style before expanding it. Preserve accepted items while iterating on the specific remaining issues; record further approvals and corrections here as they occur.
+Check evaluated dimensions, triangle counts, winding, non-manifold edges and positive volume for intended solids. Hollow objects still need wall thickness and connected rims. Inspect gaps, z-fighting, bevel intersections, colour boundaries and shading after export. Fix defects in the source and rebuild the affected models; do not regenerate approved neighbours as part of an unrelated correction.

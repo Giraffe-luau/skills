@@ -53,7 +53,9 @@ If you already have a `create-icon` folder, compare or back it up before copying
 
 ## 3D model skill checkpoint
 
-`create-3dmodel` includes the current construction and review workflow, modelling lessons, Roblox import instructions, and an optional FBX uploader. The approved examples documented in the skill include the broad faceted tree trunk, revised fire hydrant, and open-frame barricade. Lamp feedback specifies a separate outer housing and internal glowing bulb. Generated models and credentials are not included.
+`create-3dmodel` includes construction and review guidance for standalone props and small asset packs, approved modelling examples, Roblox import instructions, and an optional FBX uploader. The checkpoint covers deliberate facets versus smooth surfaces, sparse tree geometry, fitted tool and cable joints, separate lamp housing/bulbs, simple logs, and the approved unicorn floatie, castle crowns and chunky beach chest. It also documents current pack folders, archived iterations and preservation of user-adjusted scales and placements.
+
+The uploader saves each successful model ID beside its own FBX, preserves existing records and completed uploads in partially failed batches, and identifies pending operations before a retry. Generated models, screenshots and credentials are not included.
 
 Install an independent copy for either assistant:
 

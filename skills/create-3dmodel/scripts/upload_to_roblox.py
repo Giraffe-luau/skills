@@ -12,7 +12,7 @@ into a shell history or a process list:
     ROBLOX_CREATOR_TYPE         "user" (default) or "group"
     ROBLOX_ASSET_DESCRIPTION    optional description stamped on each upload
 
-On this machine, run it as python3 and pass the config inline -- see 'This machine' in SKILL.md.
+Run with python3 and configure the environment as described above.
 
 The key is never printed, and nothing is written anywhere except the
 asset_ids.json beside the files you uploaded.
@@ -23,7 +23,7 @@ moderation, so an id coming back does NOT guarantee it is renderable yet.
 
 NOTE: this uploads MODELS. Do not use it for PNGs -- an Open Cloud upload with
 assetType "Decal" returns a wrapper id that renders blank. Images go through the
-Studio bridge's upload_image instead; see reference/roblox-pipeline.md.
+Studio bridge's upload_image instead; see the skill's references/roblox-import.md.
 """
 
 import json
@@ -49,12 +49,12 @@ def config():
             sys.exit(f"could not read ROBLOX_OPENCLOUD_KEY_FILE: {exc}")
     if not key:
         sys.exit("set ROBLOX_OPENCLOUD_KEY or ROBLOX_OPENCLOUD_KEY_FILE "
-                 "(see 'This machine' in SKILL.md)")
+                 "(see references/roblox-import.md)")
 
     creator = os.environ.get("ROBLOX_CREATOR_ID", "").strip()
     if not creator.isdigit():
-        sys.exit("set ROBLOX_CREATOR_ID to your numeric Roblox user id "
-                 "(see 'This machine' in SKILL.md)")
+        sys.exit("set ROBLOX_CREATOR_ID to your numeric Roblox user or group id "
+                 "(see references/roblox-import.md)")
 
     ctype = os.environ.get("ROBLOX_CREATOR_TYPE", "user").strip().lower()
     if ctype not in ("user", "group"):
@@ -138,7 +138,22 @@ def upload(path, key, creator, creator_type, description):
             return None, f"done but no assetId: {json.dumps(r)[:300]}"
         if st not in (200, 404):
             return None, f"poll HTTP {st} {json.dumps(r)[:200]}"
-    return None, "timed out waiting for the operation to finish"
+    return None, f"operation {op} still pending after polling; inspect {OPS + op} before retrying"
+
+
+def record_asset(path, asset_id):
+    """Persist each success beside its own source, including partial batches."""
+    name = os.path.splitext(os.path.basename(path))[0]
+    out = os.path.join(os.path.dirname(os.path.abspath(path)), "asset_ids.json")
+    existing = {}
+    if os.path.exists(out):
+        with open(out, "r", encoding="utf-8") as fh:
+            existing = json.load(fh)
+    existing[name] = asset_id
+    with open(out, "w", encoding="utf-8") as fh:
+        json.dump(existing, fh, indent=2, sort_keys=True)
+        fh.write("\n")
+    return out
 
 
 def main():
@@ -146,25 +161,19 @@ def main():
     if not files:
         sys.exit(__doc__)
     key, creator, creator_type, description = config()
-    results = {}
+    failed = False
     for path in files:
         name = os.path.splitext(os.path.basename(path))[0]
         asset_id, err = upload(path, key, creator, creator_type, description)
         if err:
+            failed = True
             print(f"FAIL {name}: {err}", flush=True)
         else:
             print(f"OK   {name} -> {asset_id}", flush=True)
-            results[name] = asset_id
-    if results:
-        out = os.path.join(os.path.dirname(os.path.abspath(files[0])), "asset_ids.json")
-        existing = {}
-        if os.path.exists(out):
-            with open(out, "r", encoding="utf-8") as fh:
-                existing = json.load(fh)
-        existing.update(results)
-        with open(out, "w", encoding="utf-8") as fh:
-            json.dump(existing, fh, indent=2, sort_keys=True)
-        print(f"\nwrote {out}")
+            out = record_asset(path, asset_id)
+            print(f"wrote {out}", flush=True)
+    return 1 if failed else 0
 
 
-main()
+if __name__ == "__main__":
+    sys.exit(main())

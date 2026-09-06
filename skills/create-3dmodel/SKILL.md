@@ -1,11 +1,11 @@
 ---
 name: create-3dmodel
-description: Build or modify standalone low-poly 3D game props in Blender, with editable geometry, previews, and mesh exports. Use for individual models such as barrels, crates, furniture, tools, or scenery props. Skin design and skin decoration kits belong to create-assets; raster UI icons belong to create-icon.
+description: Build or modify standalone stylised low-poly 3D game props and small asset packs in Blender, with editable geometry, previews, and mesh exports. Skin design and skin decoration kits belong to create-assets; raster UI icons belong to create-icon.
 ---
 
 # Create 3D Model
 
-Create the requested independent model in the chunky, bevelled style used by the existing skin props. Keep this workflow separate from skin layout, skin configuration, and UI icon generation. It works in Claude Code and Codex with local Blender or a connected Blender execution tool.
+Create the requested standalone prop or small asset pack in the established chunky style, using deliberate facets, fitted joints and smooth surfaces where the reference calls for them. Keep this workflow separate from skin layout, skin configuration, and UI icon generation. It works in Claude Code and Codex with local Blender or a connected Blender execution tool.
 
 ## Build
 
@@ -34,7 +34,7 @@ Inside the Roblox Model, organise parts into clearly named Folder instances by f
 
 ## Construction quality
 
-Build the form that makes the object work: a cupped shovel blade, a continuous handle fork, a tapered pick head, or a genuinely hollow trophy bowl. A recognizable outline alone is insufficient. Before modelling, identify the defining silhouette, cross-section, junctions, and openings; choose the simplest geometry that expresses them. Prefer a few deliberate faces and controlled taper/flare loops over dense remeshed surfaces for simple stylised forms.
+Build the form that makes the object work: a cupped shovel blade, a continuous handle fork, a tapered pick head, or a genuinely hollow trophy bowl. A recognizable outline alone is insufficient. Before modelling, identify the defining silhouette, cross-section, junctions, openings, frame thickness and colour regions; choose the simplest geometry that expresses them. Prefer a few deliberate faces and controlled taper/flare loops over dense remeshed surfaces for simple stylised forms.
 
 Use the construction and upgrade guidance in [references/modelling.md](references/modelling.md). Keep distinct functional components editable, while making each manufactured component coherent. Check attachments from the side and at each endpoint, curved forms in profile, and special items as silhouettes before adding surface details. Follow the approved reference: retain broad facets when they define the style; otherwise smooth continuous curved surfaces while retaining intentional hard edges. Match leaf-texture detail when foliage references call for it.
 
@@ -50,14 +50,14 @@ Deliver the model and previews for user review. Do not claim approval or in-game
 
 Read [references/roblox-import.md](references/roblox-import.md) when the user asks to upload or place the model in Studio. Reuse explicit session and upload authorization from the conversation. Verify the requested Studio session before making any changes; do not fall back to a different open game.
 
-Import only the standalone model into a clearly named review container, select it, and frame it so the user can find it. Skin folders and skin assembly remain the responsibility of `create-assets`. Do not enter Play mode to preview a prop.
+Place new assets within the project's established pack/review structure, select and frame them for review. When replacing a current model, preserve the user's latest scale and placement and archive its earlier revision; follow the organisation guidance in the import reference. Skin folders and skin assembly remain the responsibility of `create-assets`. Do not enter Play mode to preview a prop.
 
 ## Learn from user feedback
 
-When the user corrects an output or explicitly approves an improvement, save the reusable finding in this skill during that task without waiting for a separate reminder. Apply this to the installed copy being used. Update another installation only when the user has authorized it. Update the relevant existing guidance instead of appending a transcript or duplicate rules, and briefly tell the user what was saved.
+When the user corrects an output or explicitly approves an improvement, save the reusable finding in this skill during that task without waiting for a separate reminder. Apply this to the active installed copy. Update another installation only when the user has authorised it. Update the relevant existing guidance instead of appending a transcript or duplicate rules, and briefly tell the user what was saved.
 
 Distinguish explicit approval from the assistant's own visual checks. Record why an accepted revision works, including meaningful measurements when available; preserve approved components. Apply the lesson to comparable subjects without turning an example's polygon count, palette or topology into a universal requirement. New user references take precedence over earlier defaults.
 
 ## Local skill copies
 
-Installed user skills and any shared skill repository are independent copies. Editing this skill does not authorize syncing, publishing, or updating another copy. Keep generated models in the consuming project, outside the installed skill.
+Installed user skills and any shared skill repository are independent copies. Feedback capture in the active installation does not imply repository publishing. Update other installations or publish to the shared repository only when requested or already authorised by the user. Never create automatic syncs or replace independent copies with symlinks. Keep generated models in the consuming project, outside the installed skill.
