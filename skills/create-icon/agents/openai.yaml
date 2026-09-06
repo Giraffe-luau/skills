@@ -1,0 +1,4 @@
+interface:
+  display_name: "Create Icon"
+  short_description: "Generate bold faceted game icons from a fixed style"
+  default_prompt: "Use $create-icon to generate a game icon of a red shopping basket in the bundled style."

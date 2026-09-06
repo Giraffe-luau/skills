@@ -1,0 +1,27 @@
+Generate ONE standalone game UI icon of {SUBJECT}.
+
+REFERENCE AUTHORITY
+The attached four-icon board is the sole visual style reference: an orange picture frame, green cash bundle, pale blue document, and purple social symbol. Match their construction, outline, contrast, and level of detail. They are style examples, not objects to include. Follow this board rather than a generic polished mobile-game illustration.
+
+SHAPE LANGUAGE
+Draw a compact, immediately recognizable object using a small number of deliberate polygonal shapes. Build the silhouette from straight segments, sharp corners, and short flat cuts at corners. Suggest a curved object with a few angular segments, as the board's purple symbol does. Keep irregularities intentional and the outline decisive. Avoid smooth inflated contours, rounded stroke joins, soft bevels, and sculpted toy-like surfaces.
+
+EXTERIOR OUTLINE
+Use a very heavy, solid #161616 (RGB 22, 22, 22) exterior outline around the complete object. Make the border exceptionally thick and prominent: its visible width should be about 10–12% of the icon's shorter overall dimension, measured across a single edge. Preserve this broad band around the top, sides, bottom, and small protrusions. The outline should read immediately as a wide, solid graphic border even at thumbnail size; do not reduce it to a thin edge. Form corners with angular joins or short straight clipped corners, never rounded joins. The dark border is a flat graphic shape with consistent visual weight. Do not outline every internal piece. Internal boundaries usually come from adjoining color shapes.
+
+DEPTH AND UNDERSIDE
+Construct a dominant front or top face with one or two clearly visible, darker colored side or underside faces. These offset planes give the object a shallow, chunky thickness, like the cash bundle and purple symbol. Keep their direction consistent with the chosen view. Distinguish the colored depth plane from the exterior #161616 border. Show depth through simple overlapping and offset geometry, not through rounded volume rendering, cast shadows, glossy edge bevels, or a dramatically low camera angle.
+
+COLOR AND SHADING
+Use bright saturated colors and large, clean, mostly flat areas. For each material, use a main color, a distinctly darker side color, and at most one lighter accent where useful. Keep clear contrast between these regions. A broad subtle color transition is acceptable only if it stays subordinate to the flat shape construction visible in the board.
+Allow one or two broad angular highlight shapes across a main face, like the diagonal treatment on the frame or the simple lighter face of the purple symbol. Do not scatter triangles over every surface. No dense faceting, many intermediate shades, narrow shine strips, specular spots, reflected environments, realistic material texture, or smoothly modeled 3D shading.
+
+SUBJECT DETAILS
+Include only a few large features needed to identify the subject. Keep small parts angular and integrated into the main object. Do not add a face, ornaments, trim, hardware, labels, or accessories unless required by the requested subject. Do not copy the reference objects' details onto unrelated subjects.
+
+COMPOSITION
+One object only, centered on a square canvas, with about 85–90% occupancy and enough clear padding to keep the heavy border fully visible. Use a simple slightly turned view when it helps expose the side or underside. Favor the board's bold readable proportions over realistic proportions. The result must read clearly as a small game icon at 64–100 pixels.
+
+BACKGROUND AND DELIVERY
+Use a uniform solid chroma-key background: pure green #00FF00, or pure magenta #FF00FF if the subject contains green. Do not copy the board's white presentation background. No background gradient, shadow, texture, scenery, text, UI tile, watermark, or additional icons.
+Return the original generated image unchanged. No follow-up edit, background removal, masking, cleanup, or retouching.
