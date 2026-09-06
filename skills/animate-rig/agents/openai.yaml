@@ -1,0 +1,4 @@
+interface:
+  display_name: "Animate Rig"
+  short_description: "Animate rigs and verify movement in Roblox"
+  default_prompt: "Use $animate-rig to animate this rig and make a working Studio playtest."

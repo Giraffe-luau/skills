@@ -1,11 +1,13 @@
 ---
 name: create-3dmodel
-description: Build or modify standalone stylised low-poly 3D game props and small asset packs in Blender, with editable geometry, previews, and mesh exports. Skin design and skin decoration kits belong to create-assets; raster UI icons belong to create-icon.
+description: Build, modify or rig standalone stylised low-poly 3D game props and small asset packs in Blender, with editable geometry, skin weights, previews and mesh exports. Animate existing rigs with animate-rig; skin decoration kits belong to create-assets and raster UI icons to create-icon.
 ---
 
 # Create 3D Model
 
-Create the requested standalone prop or small asset pack in the established chunky style, using deliberate facets, fitted joints and smooth surfaces where the reference calls for them. Keep this workflow separate from skin layout, skin configuration, and UI icon generation. It works in Claude Code and Codex with local Blender or a connected Blender execution tool.
+Create the requested standalone prop or small asset pack in the established chunky style, using deliberate facets, fitted joints and smooth surfaces where the reference calls for them. Keep this workflow separate from skin layout, skin configuration, and UI icon generation.
+
+Use the user-approved soft painted gradients as the default finish across all model families. Build UV-mapped gradients into new assets from the start, alongside deliberate material colour regions; follow the finish guidance in `references/modelling.md`. Preserve functional Neon, transparency and existing approved artwork. Flat comparison studies are explicit exceptions, not the normal output. It works in Claude Code and Codex with local Blender or a connected Blender execution tool.
 
 ## Build
 
@@ -38,6 +40,12 @@ Build the form that makes the object work: a cupped shovel blade, a continuous h
 
 Use the construction and upgrade guidance in [references/modelling.md](references/modelling.md). Keep distinct functional components editable, while making each manufactured component coherent. Check attachments from the side and at each endpoint, curved forms in profile, and special items as silhouettes before adding surface details. Follow the approved reference: retain broad facets when they define the style; otherwise smooth continuous curved surfaces while retaining intentional hard edges. Match leaf-texture detail when foliage references call for it.
 
+## Rig for the intended interaction
+
+The user wants assets prepared for their intended environmental response as well as direct player interaction. This includes trees, branches and foliage swaying in wind. When that response needs bending or articulation, include an appropriate rig as part of creating the model: skinned bones for deformation, or fitted pivots/joints for rigid moving components. An object that only translates, spins, falls or gets picked up does not automatically need a skeleton. Assess motion when planning topology and component boundaries; do not add unused bones to static props or rebuild existing packs without a request.
+
+For rigging, read [references/rigging.md](references/rigging.md). Preserve the approved rest appearance and editable source components, export real skin weights where deformation is needed, and verify the result after import. Rig construction stays in this skill; use the installed animate-rig skill for requested clips, procedural motion and Play-mode animation previews.
+
 ## Verify and review
 
 Render and actually inspect the geometry from its intended gameplay view and at least one revealing alternate view. Use Blender renders, not an AI-generated image of what the model might look like. Correct visible intersections, floating details, unusable proportions, and broken shading in the source model before delivering it.
@@ -50,14 +58,14 @@ Deliver the model and previews for user review. Do not claim approval or in-game
 
 Read [references/roblox-import.md](references/roblox-import.md) when the user asks to upload or place the model in Studio. Reuse explicit session and upload authorization from the conversation. Verify the requested Studio session before making any changes; do not fall back to a different open game.
 
-Place new assets within the project's established pack/review structure, select and frame them for review. When replacing a current model, preserve the user's latest scale and placement and archive its earlier revision; follow the organisation guidance in the import reference. Skin folders and skin assembly remain the responsibility of `create-assets`. Do not enter Play mode to preview a prop.
+Place new assets within the project's established pack/review structure, select and frame them for review. When replacing a current model, preserve the user's latest scale and placement and archive its earlier revision; follow the organisation guidance in the import reference. Skin folders and skin assembly remain the responsibility of `create-assets`. Inspect static props in Edit; use Play when testing requested runtime animation or interaction.
 
 ## Learn from user feedback
 
-When the user corrects an output or explicitly approves an improvement, save the reusable finding in this skill during that task without waiting for a separate reminder. Apply this to the active installed copy. Update another installation only when the user has authorised it. Update the relevant existing guidance instead of appending a transcript or duplicate rules, and briefly tell the user what was saved.
+When the user corrects an output or explicitly approves an improvement, save the reusable finding in this skill during that task without waiting for a separate reminder. This is a standing user preference for the installed Claude and Codex copies. Update the relevant existing guidance instead of appending a transcript or duplicate rules, and briefly tell the user what was saved.
 
 Distinguish explicit approval from the assistant's own visual checks. Record why an accepted revision works, including meaningful measurements when available; preserve approved components. Apply the lesson to comparable subjects without turning an example's polygon count, palette or topology into a universal requirement. New user references take precedence over earlier defaults.
 
 ## Local skill copies
 
-Installed user skills and any shared skill repository are independent copies. Feedback capture in the active installation does not imply repository publishing. Update other installations or publish to the shared repository only when requested or already authorised by the user. Never create automatic syncs or replace independent copies with symlinks. Keep generated models in the consuming project, outside the installed skill.
+Installed user skills and any shared skill repository are independent copies. Feedback capture in the active installation does not imply repository publishing. The standing preference to update both local Claude and Codex copies is a separate authorisation; publish to the shared repository only when requested. Never create automatic syncs or replace independent copies with symlinks. Keep generated models in the consuming project, outside the installed skill.

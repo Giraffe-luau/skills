@@ -10,6 +10,8 @@ An open rail barricade is not a thick panel with rounded holes. A lantern with a
 
 Read colour blocks as part of the construction. A red hydrant still needs deliberate differences between its body, bands, flanges and caps. Do not assign nearly identical colours and expect smooth shading to provide the missing separation. Judge scale in the game world: contact-sheet tiles often resize different objects to the same apparent height.
 
+For a new family, resolve one representative asset's construction and vulnerable views before multiplying recolours. A shared helper must not impose a generic cube, spherical canopy, thin loop bow or branching plant when the reference calls for a different subtype. Distinguish a style experiment awaiting review from a user-approved example.
+
 ## Spend geometry on the form
 
 Start with sparse cross-sections, shaped profiles, extrusions and sweeps. Add loops where taper, flare, curvature or a joint requires them. Avoid voxel remeshing as the default for simple stylised shapes. Measure evaluated triangles per component after modifiers; a few thousand is not a target or a claimed Roblox platform limit.
@@ -32,6 +34,8 @@ Apply transforms before bevels. With `primitive_cube_add(size=1)`, object scale 
 Check the full attachment section against the actual receiving surface, including taper, bevels and endpoint direction. A centreline touching a surface is not a fitted joint.
 
 - Seat shafts within sockets and cap them cleanly. Keep a crate brace against its plank face and inside the frame's depth.
+- An open chest or gift needs actual walls, floor and rim; opening its lid above a solid body block does not create a cavity. Detached lids need a deliberate resting point or hinge. Fit loose contents to the receiving surface so a mound does not bury them.
+- When scaling a compound helper, scale its profile heights, radii and attachment offsets consistently. Check both small and large uses: scaling only a bell's radius while scaling its loop on all axes produces stretched miniature bells and detached full-size loops.
 - Compute the trophy wall radius at each handle's attachment height. Bury both lower handle ends within that wall without exposing them inside the bowl.
 - Put a cable's complete end section inside its insulator. A centreline near the block's upper face leaves the cable perched on top. Check its radius and entry angle from above and the side.
 - Make castle crowns thick enough for short, broad battlements. Cutting notches into an integral crown preserves the tower contour and avoids thin tabs, perched blocks and overhangs.
@@ -52,6 +56,7 @@ Use a few broad radial faces, sparse taper/flare rings, a widened foot and angul
 Choose foliage geometry from the reference:
 
 - Recognizable textured oak leaves need original UV-mapped leaf clusters/cards or shaped leaves, not solid green spheres. Preserve canopy shape, leaf scale and density. Check the back and underside. Alpha-cutout cards are intentional open surfaces; validate UVs, normals, alpha and two-sided rendering rather than requiring sealed volume.
+- Solid clustered canopies use a few coarse, deliberately faceted masses with varied size and placement when that is what the reference shows. Keep their trunks sparse and carry a continuous support through every stacked tier; isolated upper foliage must not float above an unfinished stem. This treatment is separate from textured oak leaves.
 - Solid beach palms use broad folded blades with thickness, a raised centre ridge, taper and drooping tips. Keep their fronds long and narrow enough to read as a palm; the oak's textured-card treatment is not a default for every tree. Segmented angular trunks and coconut clusters follow the beach reference.
 - The approved loose logs use orange/coral bark, broad longitudinal facets, pale polygonal cuts, a narrow bark lip and a few fitted branch stubs. Keep cuts nearly flush. Dense tubular growth rings and realistic dark bark were inappropriate for this reference.
 
@@ -96,10 +101,20 @@ AgX changes this palette's saturation and brightness; set the view transform bef
 
 Convert display hex/sRGB colours to linear values for Blender's Principled BSDF. Preserve the original display colours separately for Roblox Color3 assignment. In the established uploader route, vertex-colour-only materials did not survive reliably: use explicit part colours for untextured pieces, or UV textures when painted detail is required.
 
-For lamps, keep the shell/frame, socket and small light source separate. Tune housing transparency and the bulb's Neon colour in Studio without changing global scene lighting. Record these property overrides; an FBX material alone does not reproduce the Studio setup.
+For lamps, keep the shell/frame, socket and small light source separate. Tune housing transparency and the bulb's Neon colour in Studio. Change global scene lighting when the user requests it; preserve the previous properties and compare the same assets/camera before and after. Use readable ambient fill and restrained bloom so lighting does not erase colour regions or conceal model faults. Record these property overrides; an FBX material alone does not reproduce the Studio setup.
+
+## Painted curved surfaces
+
+For a cambered board or other curved painted panel, triangulate the riding surface and surrounding rail deliberately. A single non-planar ngon can bridge across the intended curvature and hide portions of an inset texture even when both meshes are manifold. Triangulating alone is not sufficient: rail and inset must follow compatible curvature and maintain clearance over the whole surface, especially nose and tail. Check the full graphic from above in Blender and again on the imported UV-mapped mesh. Smooth normals across a continuous cambered riding surface while retaining hard rail and sidewall edges; flat fan triangles can leave visible diagonal shading across otherwise correct artwork in Studio. Keep raised silhouette details separately editable. If the user plans to add a material pattern in Studio, retain plain coloured geometry instead of baking that pattern into the asset.
+
+The user approved the soft painted gradients on the fish and requested that treatment across the asset packs. The user subsequently approved the full gradient revision and explicitly requested gradients on everything. Use soft painted gradients by default across all new model families, rather than only the fish or selected props; preserve intentional material regions, readable details and existing approved geometry unless a shape correction is requested. Use a UV-mapped colour atlas for broad hue/value transitions that complement the form, preserving deliberate facets and functional colour regions. Judge gradients under consistent lighting and keep their strength appropriate to each material. Inspect UV seams on both sides and around boolean cuts; cylindrical angle wrapping can accidentally sample another atlas region. Where the intended colouring is symmetric, a continuous projected mapping can avoid that seam. Keep scene-specific cast shadows out of the colour map.
 
 ## Review the vulnerable views
 
 Use actual Blender renders and actual Studio captures. Inspect a gameplay view plus views that expose the likely failure: crate side, shovel profile, bowl interior, both handle joints, cable entry, crown top, foliage underside, or floatie rear. A distant overview and a successful asset ID do not validate those details.
 
 Check evaluated dimensions, triangle counts, winding, non-manifold edges and positive volume for intended solids. Hollow objects still need wall thickness and connected rims. Inspect gaps, z-fighting, bevel intersections, colour boundaries and shading after export. Fix defects in the source and rebuild the affected models; do not regenerate approved neighbours as part of an unrelated correction.
+
+Keep technical validation separate from visual approval. Closed individual meshes can still form a solid-filled chest, intersecting frames or floating fittings. During a requested pack audit, record coverage per asset and distinguish observed visual defects, source-confirmed risks and subjective reference/proportion judgments. Do not describe a coplanarity risk as observed flicker without seeing it, or call a full pack correct based on distant overviews.
+
+Use textures for small flush surface markings such as strawberry seeds, pineapple skin and birch bark. Do not model them as protruding beads or thin pieces that intersect tapered surfaces. Fruit species need distinct silhouettes and species-appropriate leaves/crowns; do not reuse one generic leaf on every fruit. Judge fruit sizes together in world units so a grape bunch does not dwarf the collection. The pineapple needs a recognisable stiff crown and diamond skin treatment; a yellow cylinder with palm fronds is insufficient.

@@ -6,7 +6,8 @@ Reusable skills for Claude Code and Codex.
 
 | Skill | Purpose |
 | --- | --- |
-| [create-3dmodel](skills/create-3dmodel/SKILL.md) | Build standalone low-poly props in Blender, with editable geometry, previews, exports and optional Roblox Studio import. |
+| [create-3dmodel](skills/create-3dmodel/SKILL.md) | Build and rig stylised low-poly models in Blender, with soft painted gradients, editable geometry, exports and optional Roblox Studio import. |
+| [animate-rig](skills/animate-rig/SKILL.md) | Animate existing rigs and verify them in a working Roblox playtest, including swimming and environmental motion such as wind sway. |
 | [create-icon](skills/create-icon/SKILL.md) | Generate chunky, angular game icons with a heavy #161616 outline, colored depth planes, and broad highlights. |
 
 The icon skill includes the working prompt, subject examples, and original four-icon reference board. Generated icon collections are kept in the consuming project and are not included here.
@@ -53,7 +54,9 @@ If you already have a `create-icon` folder, compare or back it up before copying
 
 ## 3D model skill checkpoint
 
-`create-3dmodel` includes construction and review guidance for standalone props and small asset packs, approved modelling examples, Roblox import instructions, and an optional FBX uploader. The checkpoint covers deliberate facets versus smooth surfaces, sparse tree geometry, fitted tool and cable joints, separate lamp housing/bulbs, simple logs, and the approved unicorn floatie, castle crowns and chunky beach chest. It also documents current pack folders, archived iterations and preservation of user-adjusted scales and placements.
+`create-3dmodel` includes construction and review guidance for standalone props and small asset packs, approved modelling examples, Roblox import instructions, and an optional FBX uploader. Soft painted gradients are the default across model families, while preserving functional Neon, transparency and approved artwork. The checkpoint covers deliberate facets versus smooth surfaces, sparse tree geometry, fitted tool and cable joints, separate lamp housing/bulbs, simple logs, and the approved unicorn floatie, castle crowns and chunky beach chest. It also documents current pack folders, archived iterations and preservation of user-adjusted scales and placements.
+
+Rigging is part of model creation when the intended movement calls for bending or articulation, including trees and foliage responding to wind. The rigging reference covers skin weights, preserved gradient UVs, the measured Blender-to-Roblox scale and pivot workflow, and deformation checks. Rigid whole-object movement can use the model pivot without adding a skeleton.
 
 The uploader saves each successful model ID beside its own FBX, preserves existing records and completed uploads in partially failed batches, and identifies pending operations before a retry. Generated models, screenshots and credentials are not included.
 
@@ -67,6 +70,19 @@ cp -R skills/create-3dmodel "${CODEX_HOME:-$HOME/.codex}/skills/"
 Compare or back up an existing installation before replacing it. These are manual copies; pulling or editing this repository does not automatically update user skills, and user-skill edits do not automatically update this repository.
 
 Invoke `/create-3dmodel a barrel` in Claude Code, or `$create-3dmodel a barrel` in Codex. Blender must be available locally or through a connected execution tool. Roblox import additionally needs access to the intended Studio session and upload credentials; the skill itself does not install these integrations. `create-assets` remains a separate skin-design workflow and is not included here.
+
+## Animation skill checkpoint
+
+`animate-rig` covers procedural bone/joint motion or authored clips, a usable runtime preview, and actual Play-mode verification. Its fish reference records the user-approved body-to-tail wave, independent fin strokes, swim paths and preview controls. Tree wind response is included as guidance for future work; it has not yet been implemented or approved as an example.
+
+Install independent local copies:
+
+```sh
+cp -R skills/animate-rig ~/.claude/skills/
+cp -R skills/animate-rig "${CODEX_HOME:-$HOME/.codex}/skills/"
+```
+
+Invoke `/animate-rig make these fish swim in a playtest` in Claude Code, or `$animate-rig make these fish swim in a playtest` in Codex. The assistant needs access to the intended Roblox Studio session. The skill distinguishes client-side visual previews from server-authoritative gameplay and does not install a fishing system.
 
 ## Image-generation requirement
 

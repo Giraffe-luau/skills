@@ -1,0 +1,17 @@
+# Rigging existing props and creatures
+
+Environmental response counts as intended motion: the user specifically includes trees moving in wind. For a wind-responsive tree, keep the base/root fixed and plan a sparse trunk-to-branch rig with increasing flexibility toward branch tips and foliage. Preserve branch attachments and the rest canopy silhouette. Choose controls by visible movement; individual leaves do not each need a bone. This is the user's requested preparation rule; a tree wind animation has not yet been built or approved.
+
+The user approved the gradient fish rig and its swimming preview on 2026-09-07. Prepare new deforming or articulated interactive assets for animation during modelling. Choose the mechanism from the action: weighted bones for bending bodies and flexible rods, rigid joints or hinge pivots for opening lids, and whole-model transforms for rigid pickups. Environmental interaction alone does not require skin weights. The animate-rig skill owns motion authoring and runtime preview checks.
+
+Preserve the approved rest silhouette, UVs, palette and dimensions when adding a rig. Keep independently editable source components in the Blender file, even if the runtime export combines them into one skinned mesh. A rig Model may keep its skinned MeshPart and AnimationController directly under the Model; functional rig hierarchy takes precedence over decorative component folders.
+
+Use a small skeleton matched to the requested movement. Blend adjoining regions and fin roots so attachments do not split during posing; bind attached face details to the head. Normalize weights, leave the origin Root unweighted, and verify no more than four influences per vertex for Roblox. Export actual armature skin weights: adding Bone instances to a rigid imported mesh does not rig it.
+
+Preserve texture colours when consolidating materials. Reuse existing gradient pixels and remap UV regions; if adding solid-colour atlas patches, check both pixel values and the final rendered material. Retain the original editable material setup separately.
+
+For the measured Blender 5.1.2 fish workflow, FBX export with global_scale=0.01 and FBX_SCALE_NONE preserved stud dimensions; FBX_SCALE_UNITS imported 100× too small. These are measured workflow settings, not a universal Blender convention. Disable leaf bones and animation baking when exporting a neutral rig. Validate imported dimensions before replacing anything.
+
+Imported armatures can carry a rotated Model pivot while the mesh itself is upright. Set WorldPivot to an upright base-centre frame without moving geometry, then use PivotTo for placement. Directly replacing the imported pivot rotation with PivotTo can lay the model on its side. Keep Bone.CFrame bind transforms intact; pose through Bone.Transform. Include an Animator under the AnimationController.
+
+Verify rest and opposing bends in Blender, then actual mesh deformation and texture attachment in Studio. Bone counts alone do not prove skinning works. Test head and appendage controls, restore neutral transforms, preserve current user scale/pivot, and archive the previous model. State clearly whether only the rig or actual animation clips/runtime swimming were delivered.
