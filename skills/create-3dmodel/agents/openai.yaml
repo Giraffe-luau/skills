@@ -1,0 +1,4 @@
+interface:
+  display_name: "Create 3D Model"
+  short_description: "Build standalone bevelled low-poly game props"
+  default_prompt: "Use $create-3dmodel to build a standalone wooden barrel and render a preview."

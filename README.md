@@ -6,6 +6,7 @@ Reusable skills for Claude Code and Codex.
 
 | Skill | Purpose |
 | --- | --- |
+| [create-3dmodel](skills/create-3dmodel/SKILL.md) | Build standalone low-poly props in Blender, with editable geometry, previews, exports and optional Roblox Studio import. |
 | [create-icon](skills/create-icon/SKILL.md) | Generate chunky, angular game icons with a heavy #161616 outline, colored depth planes, and broad highlights. |
 
 The icon skill includes the working prompt, subject examples, and original four-icon reference board. Generated icon collections are kept in the consuming project and are not included here.
@@ -49,6 +50,21 @@ $create-icon a red shopping basket
 ```
 
 If you already have a `create-icon` folder, compare or back it up before copying an update over it. Run `git pull` in this checkout and copy the skill again to update installed copies.
+
+## 3D model skill checkpoint
+
+`create-3dmodel` includes the current construction and review workflow, modelling lessons, Roblox import instructions, and an optional FBX uploader. The approved examples documented in the skill include the broad faceted tree trunk, revised fire hydrant, and open-frame barricade. Lamp feedback specifies a separate outer housing and internal glowing bulb. Generated models and credentials are not included.
+
+Install an independent copy for either assistant:
+
+```sh
+cp -R skills/create-3dmodel ~/.claude/skills/
+cp -R skills/create-3dmodel "${CODEX_HOME:-$HOME/.codex}/skills/"
+```
+
+Compare or back up an existing installation before replacing it. These are manual copies; pulling or editing this repository does not automatically update user skills, and user-skill edits do not automatically update this repository.
+
+Invoke `/create-3dmodel a barrel` in Claude Code, or `$create-3dmodel a barrel` in Codex. Blender must be available locally or through a connected execution tool. Roblox import additionally needs access to the intended Studio session and upload credentials; the skill itself does not install these integrations. `create-assets` remains a separate skin-design workflow and is not included here.
 
 ## Image-generation requirement
 
