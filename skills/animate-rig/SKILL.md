@@ -1,6 +1,6 @@
 ---
 name: animate-rig
-description: Animate existing rigged Roblox models with bone or joint motion, reusable animation code or clips, and a verified Studio playtest. Use for swimming, wind-driven trees and foliage, idle loops, articulated prop actions, and requests to see a rig moving; mesh creation and skin weighting belong to create-3dmodel.
+description: Animate existing rigged Roblox models with bone or joint motion, reusable animation code or clips, and a verified Studio playtest. Use for authored character clips, swimming, wind-driven trees and foliage, idle loops, articulated prop actions, and requests to see a rig moving; mesh creation and skin weighting belong to create-3dmodel.
 ---
 
 # Animate Rig
@@ -12,6 +12,8 @@ Turn an existing rig into visibly working motion while preserving its approved m
 Identify the target model, bind pose, bone/joint hierarchy, forward axis and existing animation controller. Check that skin weights actually deform the mesh before writing motion. If the rig is missing or broken, repair it with the installed create-3dmodel skill when available; do not disguise a rigid model's movement as bone animation.
 
 Choose controls from the action: a fish needs a travelling body-to-tail wave, whereas a chest needs a lid pivot and a sensible stop angle. Use smaller stabilising motion near the head/body and deliberate follow-through toward free ends. Keep contact points and mechanical hinges fitted. Whole-model movement and articulation should support the same action; a swimming fish faces its travel direction.
+
+For humanoid character animations such as crouch, walk and sprint, read [references/character-animation.md](references/character-animation.md). It records the requested expressive R6 pose style, authored-clip workflow and character playtest checks.
 
 For fish and similar swimming creatures, read [references/fish-swimming.md](references/fish-swimming.md), which records the user-approved example. Adapt it to the creature's anatomy instead of copying fish controls into unrelated rigs.
 
