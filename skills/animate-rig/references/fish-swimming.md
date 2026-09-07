@@ -31,3 +31,9 @@ For the display, fish follow 2-by-3-stud ellipse radii at 0.38 radians per secon
 Provide swimming in place as well as travel so the user can judge skin deformation. Use an exit/reopen camera control and pause/resume. Keep the original Edit-time poses and placements intact. The verified example used client-side Bone.Transform motion with no uploaded animation clip, and Persistent streaming for the four small fish. It demonstrated swimming; it did not implement water collision, navigation, catching or server-authoritative fish simulation.
 
 The original project implementation is FishSwimPreview.client.luau beside the fish-rig-01 assets. Its project-specific paths, names and camera layout should be adapted to a new project. This reference is sufficient to reproduce the motion without access to that project.
+
+## Approved additional variants
+
+The user also approved the completed fishing rod and the extended preview on 2026-09-07: jumping, a caught fish struggling on a line, and a landed flop. Give them separate timing and poses: continuous launch/arc/dive paths with tangent-facing orientation and timed splashes; short faster struggling bursts for a catch; a side-lying curl/release and small hop for a landed fish. Preserve the gradient appearance and the fitted line/rod/fish relationship when extending these accepted examples.
+
+For the catch, compute the mouth through the posed Head bone and solve the model pivot from that point each frame. Moving only a fixed model origin lets the mouth drift off the line as the head bends. Update the line through the rod's transformed guide bones and include gentle shaft flex. Pose sampling on all four fish kept mouth error below 0.00002 studs. A jump path should match position and velocity across phase boundaries; check submerged return clearance as well as the visible airborne arc. Choose landed height from the fish's rotated thickness and actual ground surface.

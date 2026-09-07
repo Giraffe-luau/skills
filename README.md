@@ -2,6 +2,8 @@
 
 Reusable skills for Claude Code and Codex.
 
+Upcoming skill topics and deferred work are recorded in [ROADMAP.md](ROADMAP.md).
+
 ## Available skills
 
 | Skill | Purpose |
@@ -73,7 +75,7 @@ Invoke `/create-3dmodel a barrel` in Claude Code, or `$create-3dmodel a barrel` 
 
 ## Animation skill checkpoint
 
-`animate-rig` covers procedural bone/joint motion or authored clips, a usable runtime preview, and actual Play-mode verification. Its fish reference records the user-approved body-to-tail wave, independent fin strokes, swim paths and preview controls. Tree wind response is included as guidance for future work; it has not yet been implemented or approved as an example.
+`animate-rig` covers procedural bone/joint motion or authored clips, a usable runtime preview, and actual Play-mode verification. Its fish reference records the user-approved body-to-tail wave, independent fin strokes, swim paths and preview controls, plus jumping, caught-fish struggles and landed flops. The approved fishing rod adds a flexible shaft and fitted line guides; the caught fish stays attached through its posed mouth. Tree wind response is included as guidance for future work; it has not yet been implemented or approved as an example.
 
 Install independent local copies:
 
