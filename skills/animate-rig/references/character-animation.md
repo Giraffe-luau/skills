@@ -37,3 +37,13 @@ Treat animated root offsets and Humanoid.HipHeight together. Lowering both indep
 Exercise real hold/release input, stationary and moving poses, speed restoration, jump-state restoration and any installed ceiling check. Release held input on focus loss or typing, and reset state across respawn. If standing is blocked, retain crouch until space clears. Confirm client tracks appear on the server; do not claim a multi-client visual test from that alone.
 
 Record which checks actually ran. Separate runtime correctness, visual self-review and user style approval. Animation errors from imported reference scripts may concern different asset IDs; identify the source before replacing or disabling unrelated reference content.
+
+## Sprint integration example
+
+The first sprint pass is in `scrolling-mechanism/animations/sprint-r6-01/`. It carries the approved crouch's expressive motion into upright running: forward torso lean, opposing arm pumps and a visibly folded recovery leg. Sprint itself awaits visual approval.
+
+When adding sprint to crouch, use one owner for movement speed. Independently saving/restoring WalkSpeed in two scripts can restore the sprint speed after crouching or multiply an already reduced speed. The tested implementation preserves the spawn baseline and derives walk/crouch/sprint speeds from one server state; crouch takes priority, including while standing is blocked by a ceiling.
+
+The actual Play checks covered Shift+C transitions in both release orders, stationary track suppression, jump-animation handoff, server-visible tracks and respawn followed by working input/animation on the new character. Left Shift uses a higher-priority ContextActionService binding so it does not also toggle camera lock. Preserve other camera controls.
+
+Audio and footsteps are explicitly deferred by the user to a future audio skill and refinement pass. Do not add them opportunistically while making movement animations.
