@@ -1,10 +1,28 @@
 # Authored Roblox character animation
 
-Read for player/NPC humanoid clips such as crouch, walk and sprint. Character pose style is a separate choice from the approved fish procedural-motion style.
+Read for player/NPC humanoid clips such as crouch, walk, sprint and jump. Character pose style is a separate choice from the approved fish procedural-motion style.
+
+## Approved character style and checkpoint
+
+The approved set combines distinct arm and leg silhouettes, opposing strides, torso weight shifts and visible head follow-through. Keep walking calmer than sprinting; make jump takeoff, air and landing visibly different. The target is readable, expressive R6 movement rather than restrained limb rotation or a motionless head. Adapt the degree of expression to each action instead of copying the crouch pose into every clip.
+
+The user approved crouch and then the revised walk/run/jump set on 2026-09-07. These published clips identify the exact checkpoint in Scrolling Mechanism; ownership/access must be checked before reusing IDs in a different experience.
+
+| Clip | Animation ID |
+| --- | --- |
+| CrouchIdle | 115149728349128 |
+| CrouchWalk | 121938816258462 |
+| ExpressiveWalk | 88911655018911 |
+| ExpressiveRun | 119721740009543 |
+| JumpStart | 94009355231418 |
+| FallLoop | 87057410438552 |
+| Land | 79803826118806 |
+
+Editable Blender actions, native exports and runtime sources remain in the consuming project's `scrolling-mechanism/animations/crouch-r6-02/` and `locomotion-r6-02/` folders. The portable construction lessons and visual references are bundled here. Retain original reference attribution when adapting supplied clips.
 
 ## Current user direction: expressive R6 crouch
 
-The user rejected a technically working crouch with a small shuffle and barely moving arms. They want distinctive readable poses: forward torso lean, opposing raised arm positions, one leg reaching forward while the other folds back, and a clear exchange of these roles while walking. Support the stride with body twist and a stable head; increasing leg amplitude alone does not produce the requested style.
+The user rejected a technically working crouch with a small shuffle and barely moving arms. They want distinctive readable poses: forward torso lean, opposing raised arm positions, one leg reaching forward while the other folds back, and a clear exchange of these roles while walking. Support the stride with body twist and a readable gaze with authored head follow-through; a stable gaze does not mean a static head. Increasing leg amplitude alone does not produce the requested style.
 
 Visual references: [front](images/r6-crouch-front.png), [back](images/r6-crouch-back.png). These are user-supplied style targets, not evidence that a generated clip has been approved.
 
@@ -40,10 +58,22 @@ Record which checks actually ran. Separate runtime correctness, visual self-revi
 
 ## Sprint integration example
 
-The first sprint pass is in `scrolling-mechanism/animations/sprint-r6-01/`. It carries the approved crouch's expressive motion into upright running: forward torso lean, opposing arm pumps and a visibly folded recovery leg. Sprint itself awaits visual approval.
+The first sprint pass is in `scrolling-mechanism/animations/sprint-r6-01/`. It carries the approved crouch's expressive motion into upright running: forward torso lean, opposing arm pumps and a visibly folded recovery leg. The user subsequently rejected this first sprint visually for insufficient arm/leg expression and a nearly static head; its runtime integration checks still apply.
 
 When adding sprint to crouch, use one owner for movement speed. Independently saving/restoring WalkSpeed in two scripts can restore the sprint speed after crouching or multiply an already reduced speed. The tested implementation preserves the spawn baseline and derives walk/crouch/sprint speeds from one server state; crouch takes priority, including while standing is blocked by a ceiling.
 
 The actual Play checks covered Shift+C transitions in both release orders, stationary track suppression, jump-animation handoff, server-visible tracks and respawn followed by working input/animation on the new character. Left Shift uses a higher-priority ContextActionService binding so it does not also toggle camera lock. Preserve other camera controls.
 
 Audio and footsteps are explicitly deferred by the user to a future audio skill and refinement pass. Do not add them opportunistically while making movement animations.
+
+## Second locomotion pass: walk, run and jump
+
+The user rejected the first sprint visually: its arms/legs lacked expression and the head appeared static. Keep the earlier runtime checks as evidence of functionality only. Head motion needs authored pitch, yaw and roll with stride-related follow-through; merely enlarging limbs or translating the whole body is insufficient.
+
+Visual targets: [run](images/r6-run-target.png), [walk/run comparison](images/r6-walk-run-comparison.png).
+
+The next pass in `scrolling-mechanism/animations/locomotion-r6-02/` studied all seven user-provided walk/run clips. It adapts `Run1 [by M0rsDev]` and `Walk2 [by emm1gar]`, retaining attribution, adding head motion and correcting ground contact. It also authors JumpStart, FallLoop and Land. The user explicitly approved this revised walk, run and jump set on 2026-09-07 ("these look so good") and requested that the skill and repository be updated. Use this set, alongside the approved crouch, as the current character-style baseline. Approval does not extend to every future animation or to unperformed runtime tests.
+
+Do not assume the first same-named Workspace model is the intended reference: this scene had two BestRunAnimR6 containers, one without a rig. Inspect children and select the actual rig. Compare stride/contact poses rather than selecting whichever frame is closest to standing; the latter conceals the distinctive motion. Some saved frames omit individual poses: interpolate each joint's own keyed timeline instead of inserting identity transforms.
+
+The jump controller uses separate takeoff, sustained-air and landing clips, switching back into walk/run afterward while preserving normal Humanoid physics. Keep those mutually exclusive states explicit, and let crouch suppress the locomotion tracks. The installed Play test verified the five uploaded clips, visible head movement, front/back motion and JumpStart → FallLoop → Land → run transitions. New-controller respawn and multi-client visual tests were not run in this pass.

@@ -9,7 +9,7 @@ Upcoming skill topics and deferred work are recorded in [ROADMAP.md](ROADMAP.md)
 | Skill | Purpose |
 | --- | --- |
 | [create-3dmodel](skills/create-3dmodel/SKILL.md) | Build and rig stylised low-poly models in Blender, with soft painted gradients, editable geometry, exports and optional Roblox Studio import. |
-| [animate-rig](skills/animate-rig/SKILL.md) | Animate existing rigs and verify them in a working Roblox playtest, including swimming and environmental motion such as wind sway. |
+| [animate-rig](skills/animate-rig/SKILL.md) | Animate existing rigs and verify them in a working Roblox playtest, including authored R6 character clips, swimming and guidance for environmental motion. |
 | [create-icon](skills/create-icon/SKILL.md) | Generate chunky, angular game icons with a heavy #161616 outline, colored depth planes, and broad highlights. |
 
 The icon skill includes the working prompt, subject examples, and original four-icon reference board. Generated icon collections are kept in the consuming project and are not included here.
@@ -76,6 +76,8 @@ Invoke `/create-3dmodel a barrel` in Claude Code, or `$create-3dmodel a barrel` 
 ## Animation skill checkpoint
 
 `animate-rig` covers procedural bone/joint motion or authored clips, a usable runtime preview, and actual Play-mode verification. Its fish reference records the user-approved body-to-tail wave, independent fin strokes, swim paths and preview controls, plus jumping, caught-fish struggles and landed flops. The approved fishing rod adds a flexible shaft and fitted line guides; the caught fish stays attached through its posed mouth. Tree wind response is included as guidance for future work; it has not yet been implemented or approved as an example.
+
+The [character-animation reference](skills/animate-rig/references/character-animation.md) records the approved R6 crouch, revised walk/sprint and jump set, with visual targets and exact clip IDs. It covers expressive arm/leg poses, head follow-through, sparse-keyframe interpolation, Blender-to-Animator transfer, shared movement state and takeoff/fall/landing transitions. The first restrained sprint is recorded as rejected; approval and completed playtests are tracked separately. Editable game assets remain in the consuming project. Audio and footsteps are deferred to their own skill and refinement pass.
 
 Install independent local copies:
 

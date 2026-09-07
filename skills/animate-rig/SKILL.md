@@ -13,11 +13,11 @@ Identify the target model, bind pose, bone/joint hierarchy, forward axis and exi
 
 Choose controls from the action: a fish needs a travelling body-to-tail wave, whereas a chest needs a lid pivot and a sensible stop angle. Use smaller stabilising motion near the head/body and deliberate follow-through toward free ends. Keep contact points and mechanical hinges fitted. Whole-model movement and articulation should support the same action; a swimming fish faces its travel direction.
 
-For humanoid character animations such as crouch, walk and sprint, read [references/character-animation.md](references/character-animation.md). It records the requested expressive R6 pose style, authored-clip workflow and character playtest checks.
+For humanoid character animations such as crouch, walk, sprint and jump, read [references/character-animation.md](references/character-animation.md). It records the approved expressive R6 pose style, authored-clip workflow and character playtest checks.
 
 For fish and similar swimming creatures, read [references/fish-swimming.md](references/fish-swimming.md), which records the user-approved example. Adapt it to the creature's anatomy instead of copying fish controls into unrelated rigs.
 
-For environmental motion such as trees in wind, anchor the base, use slower trunk sway with increasing branch/tip response, and vary phases so foliage does not move as one rigid piece. Relate motion direction and intensity to the environment when a wind source exists. Keep this separate from deliberate whole-model travel: a rooted tree should not drift across the ground. These are construction and motion guidelines; only the fish example has been playtested and explicitly approved so far.
+For environmental motion such as trees in wind, anchor the base, use slower trunk sway with increasing branch/tip response, and vary phases so foliage does not move as one rigid piece. Relate motion direction and intensity to the environment when a wind source exists. Keep this separate from deliberate whole-model travel: a rooted tree should not drift across the ground. Tree wind motion remains design guidance. The fish/rod previews and R6 character animations have separate verified examples; their approval does not imply that wind motion has been tested.
 
 Use procedural motion for adjustable loops and immediate previews; use Animator tracks/clips when authored timing, transitions or animation-asset integration calls for them. Inspect existing tracks and scripts so two systems do not fight over the same controls.
 
