@@ -21,6 +21,10 @@ For environmental motion such as trees in wind, anchor the base, use slower trun
 
 Use procedural motion for adjustable loops and immediate previews; use Animator tracks/clips when authored timing, transitions or animation-asset integration calls for them. Inspect existing tracks and scripts so two systems do not fight over the same controls.
 
+## Consider supporting feedback
+
+Consider subtle feedback that helps the action read and feel complete: eased camera/FOV response, contact reactions, fitted line tension, or a small timed splash. Choose effects that support the current interaction, keep them restrained and reversible, and test their timing with the animation. This is a consideration, not a requirement to add every effect or expand the task. Respect deferred work such as audio. The approved sprint-camera example and its integration lessons are in [references/character-animation.md](references/character-animation.md).
+
 ## Implement for Roblox
 
 Bone.Transform is local animation state and does not replicate. A client preview must animate on each viewing client. For gameplay, separate server-authoritative movement/interactions from visual pose updates; client-only preview motion is not a multiplayer gameplay system.
