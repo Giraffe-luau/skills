@@ -10,9 +10,9 @@ Everything raised across the conversation, including ideas you didn't pick and o
 
 ## Skills
 
-| Name | Description |
-| --- | --- |
-| concept | Concept art variants for a subject before any 3D work, in your own model style |
+| Name | Description | Notes |
+| --- | --- | --- |
+| concept | Concept art variants for a subject before any 3D work, in your own model style | Same as skill just auto-triggered |
 | turnaround | Front, side and back views of an approved concept as a modelling reference |
 | silhouette | Black-shape-only pass to check a design reads at distance |
 | variants | Colourways, tiers and rarity sets generated from one approved concept |
@@ -111,7 +111,7 @@ Everything raised across the conversation, including ideas you didn't pick and o
 
 | Name | Description |
 | --- | --- |
-| /concept | Concept art variants for a subject before any 3D work, in your own model style |
+| [/concept](https://www.reddit.com/r/OpenAI/comments/1w8y3uh/astra_generates_an_image_of_a_concept_then/#lightbox) | Concept art variants for a subject before any 3D work, in your own model style |
 | /fix | Paste an error, stack trace or Output screenshot, get the diagnosis and corrected code |
 | /why | Explain Roblox's weird semantics: replication timing, deferred events, load order |
 | /review | Point at code, get conventions plus exploit plus perf in one pass |
