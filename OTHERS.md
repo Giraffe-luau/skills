@@ -178,3 +178,5 @@ Everything raised across the conversation, including ideas you didn't pick and o
 - Things folded into bigger skills should be `references/*.md` that the parent is told to read at a named point, otherwise they silently never happen.
 - Daily skills have to return in one shot and ask nothing, or they don't survive a week.
 - Skills fire on demand, conventions fire always. House style belongs in CLAUDE.md, not a command you have to remember to type.
+
+- Make some API keys that can use Live datatsores, upload assets on behalf of other developers, etc
